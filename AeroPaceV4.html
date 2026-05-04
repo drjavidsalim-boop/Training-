@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroPace V4</title>
+    <!-- React and ReactDOM CDN links -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        const { useState } = React;
+
+        function AeroPace() {
+            const [data, setData] = useState([]);
+
+            // Sample fetch function (replace with actual API if needed)
+            const fetchData = async () => {
+                const response = await fetch('https://api.example.com/aeropace'); // Example API
+                const result = await response.json();
+                setData(result);
+            };
+
+            React.useEffect(() => {
+                fetchData();
+            }, []);
+
+            return (
+                <div>
+                    <h1>AeroPace V4 Application</h1>
+                    <ul>
+                        {data.map(item => <li key={item.id}>{item.name}</li>)}
+                    </ul>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<AeroPace />, document.getElementById('app'));
+    </script>
+</body>
+</html>
